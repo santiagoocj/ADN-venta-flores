@@ -1,0 +1,70 @@
+package com.ceiba.articulo;
+
+import com.ceiba.BasePrueba;
+import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
+import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.math.BigDecimal;
+import java.util.Date;
+
+public class ArticuloTest {
+
+    @Test
+    void crearArticuloExitoso(){
+
+        var articulo = new ArticuloTestDataBuilder()
+                .conId(6L)
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(20)
+                .conValorUnidad(new BigDecimal("20000"))
+                .conFechaCreacion(new Date()).crear();
+
+        Assertions.assertEquals(6L, articulo.getId());
+        Assertions.assertEquals("Hortencia", articulo.getTipoFlor());
+        Assertions.assertEquals(20, articulo.getCantidadDisponible());
+        Assertions.assertEquals(new BigDecimal("20000"), articulo.getValorUnidad());
+    }
+
+    @Test
+    void crearArticuloSinTipoDeFlorDeberiaLanzarError(){
+        BasePrueba.assertThrows(() -> new ArticuloTestDataBuilder()
+                .conCantidadDisponible(20)
+                .conValorUnidad(new BigDecimal("20000")).crear(), ExcepcionValorObligatorio.class, "El tipo de flor es requerido para realizar el registro");
+    }
+
+    @Test
+    void crearArticuloConCantidadDisponibleNegativaDeberiaLanzarError(){
+        BasePrueba.assertThrows(() -> new ArticuloTestDataBuilder()
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(-1)
+                .conValorUnidad(new BigDecimal("20000")).crear(), ExcepcionValorInvalido.class, "El valor cantidad disponible debe ser positivo");
+    }
+
+    @Test
+    void crearArticuloSinValorUnidadDeberiaLanzarError(){
+        BasePrueba.assertThrows(() -> new ArticuloTestDataBuilder()
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(20).crear(), ExcepcionValorObligatorio.class, "El valor por unidad es obligatorio");
+    }
+
+    @Test
+    void crearArticuloSinIdDeberiaLanzarError(){
+        BasePrueba.assertThrows(() -> new ArticuloTestDataBuilder()
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(20)
+                .conValorUnidad(new BigDecimal("20000"))
+                .crear(), ExcepcionValorObligatorio.class, "El id es requerido");
+    }
+
+    @Test
+    void crearArticuloConValorUnidadNegativoDeberiaLanzarError(){
+        BasePrueba.assertThrows(() -> new ArticuloTestDataBuilder()
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(20)
+                .conValorUnidad(new BigDecimal("-10000"))
+                .conId(5L)
+                .crear(), ExcepcionValorInvalido.class, "Valor unidad no puede ser menor a cero");
+    }
+}

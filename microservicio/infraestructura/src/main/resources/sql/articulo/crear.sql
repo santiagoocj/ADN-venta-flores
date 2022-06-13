@@ -1,0 +1,1 @@
+insert into articulo(tipo_flor, cantidad_disponible, valor_unidad, fecha_creacion ) values(:tipo_flor, :cantidad_disponible, :valor_unidad, :fecha_creacion)
