@@ -1,6 +1,6 @@
 package com.ceiba.articulo.adaptador.repositorio;
 
-import com.ceiba.articulo.entidad.Articulo;
+import com.ceiba.articulo.modelo.entidad.Articulo;
 import com.ceiba.articulo.puerto.repositorio.RepositorioArticulo;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.EjecucionBaseDeDatos;
@@ -26,6 +26,12 @@ public class RepositorioArticuloMysql implements RepositorioArticulo {
     @SqlStatement(namespace = "articulo", value = "obtenerporid")
     private static String sqlObtenerPorId;
 
+    @SqlStatement(namespace = "articulo", value = "actualizarestado")
+    private static String sqlActualizarEstado;
+
+    @SqlStatement(namespace = "articulo", value = "eliminar")
+    private static String sqlEliminar;
+
     @Override
     public Long guardar(Articulo articulo) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -43,5 +49,23 @@ public class RepositorioArticuloMysql implements RepositorioArticulo {
         paramSource.addValue("id", id);
         return EjecucionBaseDeDatos.obtenerUnObjetoONull(() -> this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
                 .queryForObject(sqlObtenerPorId, paramSource, mapeoArticulo));
+    }
+
+    @Override
+    public Long actualizarEstado(Articulo articulo) {
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", articulo.getId());
+        parameterSource.addValue("tipo_flor", articulo.getTipoFlor());
+        parameterSource.addValue("cantidad_disponible", articulo.getCantidadDisponible());
+        parameterSource.addValue("valor_unidad", articulo.getValorUnidad());
+        this.customNamedParameterJdbcTemplate.actualizar(parameterSource, sqlActualizarEstado);
+        return articulo.getId();
+    }
+
+    @Override
+    public void eliminar(Long id) {
+        MapSqlParameterSource paramSource = new MapSqlParameterSource();
+        paramSource.addValue("id", id);
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlEliminar, paramSource);
     }
 }

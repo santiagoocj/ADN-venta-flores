@@ -1,7 +1,7 @@
 package com.ceiba.articulo.comando.fabrica;
 
 import com.ceiba.articulo.comando.ComandoSolicitudCrear;
-import com.ceiba.articulo.entidad.SolicitudArticulo;
+import com.ceiba.articulo.modelo.entidad.SolicitudArticulo;
 import org.springframework.stereotype.Component;
 
 @Component

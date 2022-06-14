@@ -1,4 +1,4 @@
-package com.ceiba.articulo.entidad;
+package com.ceiba.articulo.modelo.entidad;
 
 import com.ceiba.dominio.ValidadorArgumento;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
@@ -48,6 +48,18 @@ public class Articulo {
 
     }
 
+    public  void editar(SolicitudArticuloEditar solicitudArticuloEditar) {
+        if(!solicitudArticuloEditar.getTipoFlor().isEmpty()){
+            this.tipoFlor = solicitudArticuloEditar.getTipoFlor();
+        }
+        if(solicitudArticuloEditar.getCantidadDisponible() != 0){
+            this.cantidadDisponible = solicitudArticuloEditar.getCantidadDisponible();
+        }
+        if(solicitudArticuloEditar.getValorUnidad().compareTo(BigDecimal.ZERO) >= 0){
+            this.valorUnidad = solicitudArticuloEditar.getValorUnidad();
+        }
+    }
+
     public Long getId() {
         return id;
     }
@@ -67,4 +79,5 @@ public class Articulo {
     public Date getFechaCreacion() {
         return fechaCreacion;
     }
+
 }

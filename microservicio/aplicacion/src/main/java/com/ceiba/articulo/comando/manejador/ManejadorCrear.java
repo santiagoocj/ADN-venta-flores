@@ -8,7 +8,7 @@ import com.ceiba.manejador.ManejadorComandoRespuesta;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ManejadorCrear implements ManejadorComandoRespuesta<ComandoSolicitudCrear, ComandoRespuesta<String>> {
+public class ManejadorCrear implements ManejadorComandoRespuesta<ComandoSolicitudCrear, ComandoRespuesta<Long>> {
 
     private final FabricaSolicitudCrear fabricaSolicitudCrear;
     private final ServicioCrear servicioCrear;

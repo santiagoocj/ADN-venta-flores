@@ -1,8 +1,7 @@
 package com.ceiba.articulo;
 
 
-import com.ceiba.articulo.entidad.Articulo;
-import com.ceiba.articulo.entidad.SolicitudArticulo;
+import com.ceiba.articulo.modelo.entidad.Articulo;
 
 import java.math.BigDecimal;
 import java.util.Date;

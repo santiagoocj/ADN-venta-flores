@@ -6,5 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 public interface ManejadorComandoRespuesta<C, R> {
 
 	@Transactional
-    ComandoRespuesta<Long> ejecutar(C comando);
+    R ejecutar(C comando);
 }

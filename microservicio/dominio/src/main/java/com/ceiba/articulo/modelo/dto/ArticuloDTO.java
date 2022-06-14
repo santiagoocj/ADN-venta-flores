@@ -1,18 +1,13 @@
-package com.ceiba.articulo.entidad;
+package com.ceiba.articulo.modelo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
-
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
-public class SolicitudArticulo {
-
+@Getter
+public class ArticuloDTO {
+    private Long id;
     private String tipoFlor;
     private int cantidadDisponible;
     private BigDecimal valorUnidad;
