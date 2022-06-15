@@ -7,6 +7,8 @@ import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.math.BigDecimal;
+
 public class ServicioEditarTest {
 
     @Test
@@ -19,4 +21,5 @@ public class ServicioEditarTest {
 
         BasePrueba.assertThrows(() -> servicioEditar.ejecutar(solicitudArticuloEditar), ExcepcionValorObligatorio.class, "No existe un articulo para editar");
     }
+
 }

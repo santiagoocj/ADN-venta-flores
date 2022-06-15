@@ -9,3 +9,4 @@ insert into producto_facturar( id_factura, id_producto, cantidad ) values(1, 1, 
 
 insert into articulo(id, tipo_flor, cantidad_disponible, valor_unidad, fecha_creacion) values(1, 'hortencia', 6, 1000, '2022-06-13');
 insert into articulo(id, tipo_flor, cantidad_disponible, valor_unidad, fecha_creacion) values(2, 'rosas', 20, 1000, '2022-06-13');
+insert into articulo(id, tipo_flor, cantidad_disponible, valor_unidad, fecha_creacion) values(3, 'horquidea', 10, 1000, '2022-04-13');

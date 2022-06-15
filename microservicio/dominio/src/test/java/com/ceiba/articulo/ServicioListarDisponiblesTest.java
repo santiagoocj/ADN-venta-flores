@@ -31,4 +31,5 @@ public class ServicioListarDisponiblesTest {
         Assertions.assertEquals("Hortencia", articulos.get(0).getTipoFlor());
         Assertions.assertEquals(20, articulos.get(0).getCantidadDisponible());
     }
+
 }

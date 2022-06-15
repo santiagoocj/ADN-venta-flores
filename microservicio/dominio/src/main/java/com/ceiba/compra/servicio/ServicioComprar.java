@@ -9,7 +9,6 @@ import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.dominio.ValidadorArgumento;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
 
 public class ServicioComprar {
 
@@ -17,32 +16,26 @@ public class ServicioComprar {
     private final RepositorioArticulo repositorioArticulo;
     private final RepositorioCompra repositorioCompra;
 
-    public ServicioComprar(RepositorioArticulo repositorioArticulo, RepositorioCompra repositorioCompra) {
+    private final ServicioFechas servicioFechas;
+
+    public ServicioComprar(RepositorioArticulo repositorioArticulo, RepositorioCompra repositorioCompra, ServicioFechas servicioFechas) {
         this.repositorioArticulo = repositorioArticulo;
         this.repositorioCompra = repositorioCompra;
+        this.servicioFechas = servicioFechas;
     }
 
     public RespuestaCompraArticulo ejecutar(Long comando) {
         var articulo = repositorioArticulo.obtener(comando);
         ValidadorArgumento.validarObligatorio(articulo, "No existe un articulo para comprar");
-        ValidarDiaDeLaSemanaDiferenteALunes();
+        servicioFechas.validarDiaDeLaSemanaDiferenteALunes();
         var compra = Compra.crear(articulo);
-        VerificarDiaFestivo(compra);
+        if(servicioFechas.esDiaFestivo()){
+            compra.agregarValorAdicional(PORCENTAJE_AUMENTAR_VALOR_TOTAL);
+        }
         Long idCompra = repositorioCompra.guardar(compra);
         return construirRespuestaCompraArticulo(idCompra, articulo, compra.getValor());
     }
 
-    private void VerificarDiaFestivo(Compra compra) {
-        if(ServicioFechas.obtenerDiaDeLaSemana() == Calendar.SUNDAY){
-            compra.agregarValorAdicional(PORCENTAJE_AUMENTAR_VALOR_TOTAL);
-        }
-    }
-
-    private void ValidarDiaDeLaSemanaDiferenteALunes() {
-        if(ServicioFechas.obtenerDiaDeLaSemana() == Calendar.MONDAY){
-            throw new ExcepcionArticuloNoDisponibleParaLaCompra("No Se puede realizar pedidos el día lunes");
-        }
-    }
 
     private RespuestaCompraArticulo construirRespuestaCompraArticulo(Long idCompra, Articulo articulo, BigDecimal valorTotal) {
         return new RespuestaCompraArticulo(

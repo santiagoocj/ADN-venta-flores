@@ -14,4 +14,15 @@ public class RespuestaCompraArticulo {
     private int cantidad;
     private BigDecimal valorUnidad;
     private BigDecimal valorTotal;
+
+    @Override
+    public String toString() {
+        return "RespuestaCompraArticulo{" +
+                "id=" + id +
+                ", articulo='" + articulo + '\'' +
+                ", cantidad=" + cantidad +
+                ", valorUnidad=" + valorUnidad +
+                ", valorTotal=" + valorTotal +
+                '}';
+    }
 }

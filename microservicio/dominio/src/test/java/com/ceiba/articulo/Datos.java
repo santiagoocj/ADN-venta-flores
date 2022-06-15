@@ -23,8 +23,6 @@ public class Datos {
 
     public static final Articulo ARTICULO = new Articulo(1L, "Hortencia", 20, new BigDecimal("1000"), convertToDateViaSqlDate(fechaActual));
 
-    public static final Articulo ARTICULO_CON_ID_QUE_NO_EXISTE = new Articulo(7L, "Hortencia", 20, new BigDecimal("1000"), convertToDateViaSqlDate(fechaActual));
-
     private static Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
     }
