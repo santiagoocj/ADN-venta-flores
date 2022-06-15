@@ -58,7 +58,9 @@ public class RepositorioArticuloMysql implements RepositorioArticulo {
         parameterSource.addValue("tipo_flor", articulo.getTipoFlor());
         parameterSource.addValue("cantidad_disponible", articulo.getCantidadDisponible());
         parameterSource.addValue("valor_unidad", articulo.getValorUnidad());
-        this.customNamedParameterJdbcTemplate.actualizar(parameterSource, sqlActualizarEstado);
+        System.out.println("se agregaron los parametros");
+        this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarEstado, parameterSource);
+        System.out.println("se actualizo el estadp");
         return articulo.getId();
     }
 

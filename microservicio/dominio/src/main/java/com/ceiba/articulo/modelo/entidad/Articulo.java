@@ -49,13 +49,13 @@ public class Articulo {
     }
 
     public  void editar(SolicitudArticuloEditar solicitudArticuloEditar) {
-        if(!solicitudArticuloEditar.getTipoFlor().isEmpty()){
+        if(solicitudArticuloEditar.getTipoFlor() != null && !solicitudArticuloEditar.getTipoFlor().isEmpty()){
             this.tipoFlor = solicitudArticuloEditar.getTipoFlor();
         }
         if(solicitudArticuloEditar.getCantidadDisponible() != 0){
             this.cantidadDisponible = solicitudArticuloEditar.getCantidadDisponible();
         }
-        if(solicitudArticuloEditar.getValorUnidad().compareTo(BigDecimal.ZERO) >= 0){
+        if(solicitudArticuloEditar.getValorUnidad() != null && solicitudArticuloEditar.getValorUnidad().compareTo(BigDecimal.ZERO) >= 0){
             this.valorUnidad = solicitudArticuloEditar.getValorUnidad();
         }
     }
@@ -80,4 +80,14 @@ public class Articulo {
         return fechaCreacion;
     }
 
+    @Override
+    public String toString() {
+        return "Articulo{" +
+                "id=" + id +
+                ", tipoFlor='" + tipoFlor + '\'' +
+                ", cantidadDisponible=" + cantidadDisponible +
+                ", valorUnidad=" + valorUnidad +
+                ", fechaCreacion=" + fechaCreacion +
+                '}';
+    }
 }

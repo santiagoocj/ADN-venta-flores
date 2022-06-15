@@ -16,7 +16,8 @@ public class MapeoArticuloDTO implements RowMapper<ArticuloDTO>, MapperResult {
         var tipoFlor = resultSet.getString("tipo_flor");
         var cantidadDisponible = resultSet.getInt("cantidad_disponible");
         var valorUnidad = resultSet.getBigDecimal("valor_unidad");
+        var fechaCreacion = resultSet.getDate("fecha_creacion");
 
-        return new ArticuloDTO(id, tipoFlor, cantidadDisponible, valorUnidad);
+        return new ArticuloDTO(id, tipoFlor, cantidadDisponible, valorUnidad, fechaCreacion);
     }
 }

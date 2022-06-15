@@ -1,14 +1,14 @@
 package com.ceiba.articulo.controlador;
 
-public class RespuestaCrear {
+public class Respuesta {
 
     private Long valor;
 
-    public RespuestaCrear(){
+    public Respuesta(){
 
     }
 
-    public RespuestaCrear(Long valor){
+    public Respuesta(Long valor){
         this.valor = valor;
     }
 

@@ -17,4 +17,15 @@ public class SolicitudArticuloEditar {
     private String tipoFlor;
     private int cantidadDisponible;
     private BigDecimal valorUnidad;
+
+
+    @Override
+    public String toString() {
+        return "SolicitudArticuloEditar{" +
+                "id=" + id +
+                ", tipoFlor='" + tipoFlor + '\'' +
+                ", cantidadDisponible=" + cantidadDisponible +
+                ", valorUnidad=" + valorUnidad +
+                '}';
+    }
 }
