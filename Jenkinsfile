@@ -1,3 +1,4 @@
+@Library('ceiba-jenkins-library') _
 pipeline {
   //Donde se va a ejecutar el Pipeline
   agent {
@@ -12,7 +13,7 @@ pipeline {
 
   //Una sección que define las herramientas “preinstaladas” en Jenkins
   tools {
-    jdk 'JDK8_Centos' //Verisión preinstalada en la Configuración del Master
+    jdk 'JDK11_Centos' //Verisión preinstalada en la Configuración del Master
   }
 /*	Versiones disponibles
       JDK8_Mac
@@ -33,28 +34,34 @@ pipeline {
 		checkout scm
       }
     }
-    
-    stage('Compile & Unit Tests') {
+
+
+        stage('Compile & Unit Tests') {
       steps{
         echo "------------>Compile & Unit Tests<------------"
-
+		sh 'chmod +x ./microservicio/gradlew'
+		sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
+		sh './microservicio/gradlew --b ./microservicio/build.gradle test'
       }
-    }
+	}
+
 
     stage('Static Code Analysis') {
       steps{
         echo '------------>Análisis de código estático<------------'
-        withSonarQubeEnv('Sonar') {
-sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
-        }
+		sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:tienda.flores.santiago.ocampo',
+        sonarName:'''"CeibaADN-TiendaDeFlores(santiago.ocampo)"''',
+        sonarPathProperties:'./sonar-project.properties')
       }
     }
 
     stage('Build') {
       steps {
         echo "------------>Build<------------"
+		// Construir sin test
+		sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
       }
-    }  
+    }
   }
 
   post {
@@ -63,9 +70,11 @@ sh "${tool name: 'SonarScanner', type:'hudson.plugins.sonar.SonarRunnerInstallat
     }
     success {
       echo 'This will run only if successful'
+	  junit '**/test-results/test/*.xml'  //RUTA DE LOS ARCHIVOS .XML
     }
     failure {
       echo 'This will run only if failed'
+	  mail (to: 'santiago.ocampo@ceiba.com.co',subject: "Failed Pipeline:${currentBuild.fullDisplayName}",body: "Something is wrong with ${env.BUILD_URL}")
     }
     unstable {
       echo 'This will run only if the run was marked as unstable'
