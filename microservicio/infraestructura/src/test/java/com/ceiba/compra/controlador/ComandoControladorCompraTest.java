@@ -42,5 +42,5 @@ public class ComandoControladorCompraTest {
         Assertions.assertEquals("hortencia", respuesta.getValor().getArticulo());
         Assertions.assertEquals(6, respuesta.getValor().getCantidad());
     }
-    
+
 }
