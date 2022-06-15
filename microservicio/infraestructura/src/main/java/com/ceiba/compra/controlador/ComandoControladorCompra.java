@@ -24,6 +24,6 @@ public class ComandoControladorCompra {
     @PostMapping("/{id-articulo}")
     @Operation(summary = "Comprar", description = "metodo encargado de comprar un articulo")
     public ComandoRespuesta<RespuestaCompraArticulo> comprar(@PathVariable("id-articulo") Long idArticulo){
-        return null;
+        return manejadorComprar.ejecutar(idArticulo);
     }
 }

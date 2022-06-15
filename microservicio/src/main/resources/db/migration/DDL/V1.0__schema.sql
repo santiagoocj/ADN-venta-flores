@@ -38,6 +38,20 @@ create table articulo (
     primary key (id)
 );
 
+create table compra(
+    id int(11) not null auto_increment,
+    id_articulo int(11) not null,
+    valor_total DECIMAL(10,2) not null,
+    primary key (id)
+);
+
+ALTER TABLE compra
+ADD CONSTRAINT articulo_fk
+    FOREIGN KEY (id_articulo)
+    REFERENCES articulo (id)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION;
+
 ALTER TABLE factura
 ADD CONSTRAINT cliente_fk
   FOREIGN KEY (id_cliente)

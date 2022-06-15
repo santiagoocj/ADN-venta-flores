@@ -22,7 +22,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
     @Override
     public Long guardar(Compra compra) {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
-        paramSource.addValue("articulo", compra.getArticulo().getId());
+        paramSource.addValue("id_articulo", compra.getArticulo().getId());
         paramSource.addValue("valor_total", compra.getValor());
         return this.customNamedParameterJdbcTemplate.crear(paramSource, sqlCrear);
     }
