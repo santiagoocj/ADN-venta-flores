@@ -14,7 +14,7 @@ public class ServicioComprar {
     private final RepositorioCompra repositorioCompra;
     private final ServicioFechas servicioFechas;
 
-    private final static Double PORCENTAJE_AUMENTAR_VALOR_TOTAL = 0.10;
+    private static final Double PORCENTAJE_AUMENTAR_VALOR_TOTAL = 0.10;
 
     public ServicioComprar(RepositorioArticulo repositorioArticulo, RepositorioCompra repositorioCompra, ServicioFechas servicioFechas) {
         this.repositorioArticulo = repositorioArticulo;

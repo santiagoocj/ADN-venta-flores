@@ -7,9 +7,6 @@ import java.util.Date;
 
 public class ServicioFechas {
 
-    private ServicioFechas(){
-    }
-
     public static long obtenerDiferenciaEnMesesAFechaActual(Date fechalimite){
         LocalDate fechaActual = LocalDate.now();
         String fechaCreacionArticuloString = fechalimite.toString();
