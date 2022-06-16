@@ -19,7 +19,7 @@ plugins {
 
 allprojects {
     repositories {
-        mavenCentral() 
+        mavenCentral()
     }
 	apply plugin: 'org.owasp.dependencycheck'
 
@@ -27,7 +27,7 @@ allprojects {
 			"commons-io:commons-io:2.6",
 			"org.apache.commons:commons-lang3:3.7"
 	]
-	
+
 	tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 	tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
 
@@ -35,7 +35,7 @@ allprojects {
 	project.ext.mockitoinline = ['org.mockito:mockito-inline:3.11.2']
 	project.ext.mockitojupiter = ['org.mockito:mockito-junit-jupiter:3.11.2']
 	project.ext.lombok = ["org.projectlombok:lombok:1.18.20"]
-	
+
 	project.ext.springboottest = ["org.springframework.boot:spring-boot-starter-test:${springBootVersion}"]
 	project.ext.springbootweb = ["org.springframework.boot:spring-boot-starter-web:${springBootVersion}"]
 	project.ext.springdevtools = ["org.springframework.boot:spring-boot-devtools:${springBootVersion}"]
@@ -67,7 +67,7 @@ allprojects {
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
@@ -82,7 +82,7 @@ dependencies {
 
 	implementation project.ext.springbootweb
 	runtimeOnly project.ext.springdevtools
-	
+
 	implementation project.ext.springbootundertow
 	implementation project.ext.flyway
 
