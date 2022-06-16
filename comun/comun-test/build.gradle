@@ -1,7 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-sourceCompatibility = '17'
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
 	mavenCentral()
