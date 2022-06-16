@@ -122,12 +122,12 @@ public class ServicioComprarTest {
                 .conValorTotal(new BigDecimal("44000.0"))
                 .buil();
 
-        //Act
         var servicioComprar = new ServicioComprar(repositorioArticulo, repositorioCompra, servicioFechas);
 
-        //Assert
+        //Act
         var respuestaCompra = servicioComprar.ejecutar(1L);
 
+        //Assert
         Assertions.assertEquals(respuestaEsperada.getId(), respuestaCompra.getId());
         Assertions.assertEquals(respuestaEsperada.getArticulo(), respuestaCompra.getArticulo());
         Assertions.assertEquals(respuestaEsperada.getCantidad(), respuestaCompra.getCantidad());

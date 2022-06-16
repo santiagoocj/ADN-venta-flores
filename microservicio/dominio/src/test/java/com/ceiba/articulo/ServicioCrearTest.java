@@ -14,6 +14,7 @@ public class ServicioCrearTest {
 
     @Test
     void crearArticuloYGuardar(){
+        // Arrange
         var solicitudArticulo = new SolicitudArticuloTestDataBuilder()
                 .conTipoDeFlor("Rosas")
                 .conCantidadDisponible(300)
@@ -22,14 +23,14 @@ public class ServicioCrearTest {
 
         var repositorioArticulo = Mockito.mock(RepositorioArticulo.class);
         Mockito.when(repositorioArticulo.guardar(Mockito.any())).thenReturn(1L);
-
         var servicioCrear = new ServicioCrear(repositorioArticulo);
 
+        //Act
         var idArticuloCreado = servicioCrear.ejecutar(solicitudArticulo);
 
+        //Assert
         ArgumentCaptor<Articulo> captorArticulo = ArgumentCaptor.forClass(Articulo.class);
         Mockito.verify(repositorioArticulo, Mockito.times(1)).guardar(captorArticulo.capture());
-
         Assertions.assertEquals(1L, idArticuloCreado);
     }
 }

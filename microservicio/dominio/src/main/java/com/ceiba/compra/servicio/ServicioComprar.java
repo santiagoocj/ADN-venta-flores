@@ -2,7 +2,6 @@ package com.ceiba.compra.servicio;
 
 import com.ceiba.articulo.modelo.entidad.Articulo;
 import com.ceiba.articulo.puerto.repositorio.RepositorioArticulo;
-import com.ceiba.compra.excepcion.ExcepcionArticuloNoDisponibleParaLaCompra;
 import com.ceiba.compra.modelo.dto.RespuestaCompraArticulo;
 import com.ceiba.compra.modelo.entidad.Compra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
@@ -11,12 +10,11 @@ import com.ceiba.dominio.ValidadorArgumento;
 import java.math.BigDecimal;
 
 public class ServicioComprar {
-
-    private final static Double PORCENTAJE_AUMENTAR_VALOR_TOTAL = 0.10;
     private final RepositorioArticulo repositorioArticulo;
     private final RepositorioCompra repositorioCompra;
-
     private final ServicioFechas servicioFechas;
+
+    private final static Double PORCENTAJE_AUMENTAR_VALOR_TOTAL = 0.10;
 
     public ServicioComprar(RepositorioArticulo repositorioArticulo, RepositorioCompra repositorioCompra, ServicioFechas servicioFechas) {
         this.repositorioArticulo = repositorioArticulo;

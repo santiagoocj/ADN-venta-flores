@@ -39,8 +39,7 @@ public class RepositorioArticuloMysql implements RepositorioArticulo {
         parameterSource.addValue("cantidad_disponible", articulo.getCantidadDisponible());
         parameterSource.addValue("valor_unidad", articulo.getValorUnidad());
         parameterSource.addValue("fecha_creacion", articulo.getFechaCreacion());
-        Long idArticuloGuardado = this.customNamedParameterJdbcTemplate.crear(parameterSource, sqlCrear);
-        return idArticuloGuardado;
+        return this.customNamedParameterJdbcTemplate.crear(parameterSource, sqlCrear);
     }
 
     @Override
@@ -58,9 +57,7 @@ public class RepositorioArticuloMysql implements RepositorioArticulo {
         parameterSource.addValue("tipo_flor", articulo.getTipoFlor());
         parameterSource.addValue("cantidad_disponible", articulo.getCantidadDisponible());
         parameterSource.addValue("valor_unidad", articulo.getValorUnidad());
-        System.out.println("se agregaron los parametros");
         this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate().update(sqlActualizarEstado, parameterSource);
-        System.out.println("se actualizo el estadp");
         return articulo.getId();
     }
 

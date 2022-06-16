@@ -1,7 +1,6 @@
 package com.ceiba.compra.servicio;
 
 import com.ceiba.compra.excepcion.ExcepcionArticuloNoDisponibleParaLaCompra;
-import com.ceiba.compra.modelo.entidad.Compra;
 
 import java.util.Calendar;
 
