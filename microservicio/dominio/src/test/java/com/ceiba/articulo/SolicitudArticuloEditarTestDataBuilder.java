@@ -1,6 +1,5 @@
 package com.ceiba.articulo;
 
-import com.ceiba.articulo.modelo.entidad.SolicitudArticulo;
 import com.ceiba.articulo.modelo.entidad.SolicitudArticuloEditar;
 
 import java.math.BigDecimal;

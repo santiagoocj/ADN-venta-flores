@@ -80,14 +80,4 @@ public class Articulo {
         return fechaCreacion;
     }
 
-    @Override
-    public String toString() {
-        return "Articulo{" +
-                "id=" + id +
-                ", tipoFlor='" + tipoFlor + '\'' +
-                ", cantidadDisponible=" + cantidadDisponible +
-                ", valorUnidad=" + valorUnidad +
-                ", fechaCreacion=" + fechaCreacion +
-                '}';
-    }
 }
