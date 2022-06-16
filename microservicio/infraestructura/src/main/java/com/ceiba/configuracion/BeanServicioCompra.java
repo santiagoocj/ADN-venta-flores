@@ -14,4 +14,9 @@ public class BeanServicioCompra {
     public ServicioComprar servicioComprar(RepositorioArticulo repositorioArticulo, RepositorioCompra repositorioCompra, ServicioFechas servicioFechas){
         return new ServicioComprar(repositorioArticulo, repositorioCompra, servicioFechas);
     }
+
+    @Bean
+    public ServicioFechas servicioFechas(){
+        return new ServicioFechas();
+    }
 }
