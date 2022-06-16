@@ -1,8 +1,6 @@
 package com.ceiba.compra.controlador;
 
 import com.ceiba.ApplicationMock;
-import com.ceiba.articulo.controlador.Respuesta;
-import com.ceiba.factura.controlador.ComandoControladorFactura;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(ComandoControladorFactura.class)
+@WebMvcTest(ComandoControladorCompraTest.class)
 @ContextConfiguration(classes = ApplicationMock.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ComandoControladorCompraTest {

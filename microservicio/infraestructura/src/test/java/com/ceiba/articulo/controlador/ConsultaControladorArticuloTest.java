@@ -2,7 +2,6 @@ package com.ceiba.articulo.controlador;
 
 import com.ceiba.ApplicationMock;
 import com.ceiba.articulo.modelo.dto.ArticuloDTO;
-import com.ceiba.factura.controlador.ConsultaControladorFactura;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(ConsultaControladorFactura.class)
+@WebMvcTest(ConsultaControladorArticulo.class)
 @ContextConfiguration(classes = ApplicationMock.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class ConsultaControladorArticuloTest {
