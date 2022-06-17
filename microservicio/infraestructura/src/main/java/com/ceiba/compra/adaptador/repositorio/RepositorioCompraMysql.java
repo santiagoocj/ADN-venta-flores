@@ -24,6 +24,7 @@ public class RepositorioCompraMysql implements RepositorioCompra {
         MapSqlParameterSource paramSource = new MapSqlParameterSource();
         paramSource.addValue("id_articulo", compra.getArticulo().getId());
         paramSource.addValue("valor_total", compra.getValor());
+        paramSource.addValue("fecha_compra", compra.getFechaCreacion());
         return this.customNamedParameterJdbcTemplate.crear(paramSource, sqlCrear);
     }
 }

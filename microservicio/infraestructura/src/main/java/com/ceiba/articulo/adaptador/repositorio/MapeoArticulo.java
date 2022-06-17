@@ -19,6 +19,6 @@ public class MapeoArticulo implements RowMapper<Articulo>, MapperResult {
         var valorUnidad = resultSet.getBigDecimal("valor_unidad");
         var fechaCreacion = resultSet.getDate("fecha_creacion");
 
-        return Articulo.reconstruir(id, tipoFlor, cantidadDisponible, valorUnidad, fechaCreacion);
+        return Articulo.reconstruir(id, tipoFlor, cantidadDisponible, valorUnidad, fechaCreacion.toLocalDate());
     }
 }

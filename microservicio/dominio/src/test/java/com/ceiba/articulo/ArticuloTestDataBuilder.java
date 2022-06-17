@@ -4,7 +4,7 @@ package com.ceiba.articulo;
 import com.ceiba.articulo.modelo.entidad.Articulo;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ArticuloTestDataBuilder {
 
@@ -12,14 +12,14 @@ public class ArticuloTestDataBuilder {
     private String tipoFlor;
     private int cantidadDisponible;
     private BigDecimal valorUnidad;
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
 
     public ArticuloTestDataBuilder articuloTestDataBuilder(){
         this.id = 1L;
         this.tipoFlor = "Hortencia";
         this.cantidadDisponible = 500;
         this.valorUnidad = new BigDecimal("1000");
-        this.fechaCreacion = new Date();
+        this.fechaCreacion = LocalDate.now();
         return this;
     }
 
@@ -43,7 +43,7 @@ public class ArticuloTestDataBuilder {
         return this;
     }
 
-    public ArticuloTestDataBuilder conFechaCreacion(Date fechaCreacion){
+    public ArticuloTestDataBuilder conFechaCreacion(LocalDate fechaCreacion){
         this.fechaCreacion = fechaCreacion;
         return this;
     }

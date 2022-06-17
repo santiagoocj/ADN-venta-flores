@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ArticuloTest {
@@ -20,7 +21,7 @@ public class ArticuloTest {
                 .conTipoFlor("Hortencia")
                 .conCantidadDisponible(20)
                 .conValorUnidad(new BigDecimal("20000"))
-                .conFechaCreacion(new Date()).crear();
+                .conFechaCreacion(LocalDate.now()).crear();
 
         Assertions.assertEquals(6L, articulo.getId());
         Assertions.assertEquals("Hortencia", articulo.getTipoFlor());

@@ -1,9 +1,12 @@
 package com.ceiba.compra.modelo.entidad;
 
 import com.ceiba.articulo.modelo.entidad.Articulo;
+import com.ceiba.compra.excepcion.ExcepcionArticuloNoDisponibleParaLaCompra;
 import com.ceiba.dominio.ValidadorArgumento;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Compra {
 
@@ -11,15 +14,42 @@ public class Compra {
     private Articulo articulo;
     private BigDecimal valor;
 
+    private LocalDate fechaCreacion;
+
+    private static final Double PORCENTAJE_AUMENTAR_VALOR_TOTAL = 0.10;
+
     private Compra(Long id, Articulo articulo) {
         this.id = id;
         this.articulo = articulo;
         calcularValorDependiendoDeLasUnidadesDisponibles(articulo.getCantidadDisponible(), articulo.getValorUnidad());
+        this.fechaCreacion = LocalDate.now();
+        validarDiaDeLaSemanaDiferenteALunes();
+        agregarValorAdicional(PORCENTAJE_AUMENTAR_VALOR_TOTAL);
     }
 
     public Compra(Articulo articulo){
         this.articulo = articulo;
         calcularValorDependiendoDeLasUnidadesDisponibles(articulo.getCantidadDisponible(), articulo.getValorUnidad());
+        this.fechaCreacion = LocalDate.now();
+        validarDiaDeLaSemanaDiferenteALunes();
+        agregarValorAdicional(PORCENTAJE_AUMENTAR_VALOR_TOTAL);
+    }
+
+    public void validarDiaDeLaSemanaDiferenteALunes() {
+        int lunes = Calendar.MONDAY;
+        if(obtenerDiaDeLaSemana() == lunes){
+            throw new ExcepcionArticuloNoDisponibleParaLaCompra("No Se puede realizar pedidos el día lunes");
+        }
+    }
+
+    public boolean esDiaFestivo() {
+        int domingo = Calendar.SUNDAY;
+        return (obtenerDiaDeLaSemana() == domingo)? true: false;
+    }
+
+    private int obtenerDiaDeLaSemana() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
     public static Compra crear(Long id, Articulo articulo){
@@ -28,8 +58,10 @@ public class Compra {
     }
 
     public void agregarValorAdicional(Double porcentajeAgrgar){
-        BigDecimal cantidad  = this.valor.multiply(BigDecimal.valueOf(porcentajeAgrgar));
-        this.valor = this.valor.add(cantidad);
+        if(esDiaFestivo()){
+            BigDecimal cantidad  = this.valor.multiply(BigDecimal.valueOf(porcentajeAgrgar));
+            this.valor = this.valor.add(cantidad);
+        }
     }
 
     public static Compra crear(Articulo articulo) {
@@ -51,5 +83,9 @@ public class Compra {
 
     public BigDecimal getValor() {
         return valor;
+    }
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
     }
 }

@@ -18,7 +18,7 @@ public class ManejadorEliminar implements ManejadorComando<ComandoEliminar> {
     }
 
     @Override
-    public void ejecutar(ComandoEliminar comando) {
-        servicioEliminar.ejecutar(repositorioArticulo.obtener(comando.getIdArticulo()));
+    public void ejecutar(ComandoEliminar idArticuloEliminar) {
+        servicioEliminar.ejecutar(repositorioArticulo.obtener(idArticuloEliminar.getIdArticulo()));
     }
 }

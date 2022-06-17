@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +15,5 @@ public class ArticuloDTO  {
     private String tipoFlor;
     private int cantidadDisponible;
     private BigDecimal valorUnidad;
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
 }

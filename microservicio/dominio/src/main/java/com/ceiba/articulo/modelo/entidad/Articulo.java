@@ -4,7 +4,7 @@ import com.ceiba.dominio.ValidadorArgumento;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Articulo {
 
@@ -12,9 +12,9 @@ public class Articulo {
     private String tipoFlor;
     private int cantidadDisponible;
     private BigDecimal valorUnidad;
-    private Date fechaCreacion;
+    private LocalDate fechaCreacion;
 
-    public Articulo(Long id, String tipoFlor, int cantidadDisponible, BigDecimal valorUnidad, Date fechaCreacion) {
+    public Articulo(Long id, String tipoFlor, int cantidadDisponible, BigDecimal valorUnidad, LocalDate fechaCreacion) {
         this.id = id;
         this.tipoFlor = tipoFlor;
         this.cantidadDisponible = cantidadDisponible;
@@ -26,7 +26,7 @@ public class Articulo {
         this.tipoFlor = tipoFlor;
         this.cantidadDisponible = cantidadDisponible;
         this.valorUnidad = valorUnidad;
-        this.fechaCreacion = new Date();
+        this.fechaCreacion = LocalDate.now();
     }
 
     public static Articulo crear(SolicitudArticulo solicitudArticulo) {
@@ -36,7 +36,7 @@ public class Articulo {
         return new Articulo(solicitudArticulo.getTipoFlor(), solicitudArticulo.getCantidadDisponible(), solicitudArticulo.getValorUnidad());
     }
 
-    public static Articulo reconstruir(Long id, String tipoFlor, int cantidadDisponible, BigDecimal valorUnidad, Date fechaCreacion){
+    public static Articulo reconstruir(Long id, String tipoFlor, int cantidadDisponible, BigDecimal valorUnidad, LocalDate fechaCreacion){
         ValidadorArgumento.validarObligatorio(tipoFlor,"El tipo de flor es requerido para realizar el registro");
         ValidadorArgumento.validarPositivo(Double.valueOf(cantidadDisponible), "El valor cantidad disponible debe ser positivo");
         ValidadorArgumento.validarObligatorio(valorUnidad,"El valor por unidad es obligatorio");
@@ -76,7 +76,7 @@ public class Articulo {
         return valorUnidad;
     }
 
-    public Date getFechaCreacion() {
+    public LocalDate getFechaCreacion() {
         return fechaCreacion;
     }
 

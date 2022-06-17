@@ -42,6 +42,7 @@ create table compra(
     id int(11) not null auto_increment,
     id_articulo int(11) not null,
     valor_total DECIMAL(10,2) not null,
+    fecha_compra DATE not null,
     primary key (id)
 );
 

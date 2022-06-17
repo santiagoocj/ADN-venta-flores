@@ -3,6 +3,7 @@ package com.ceiba.compra;
 import com.ceiba.compra.modelo.dto.RespuestaCompraArticulo;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class RespuestaCompraArticuloTestDataBuilder {
 
@@ -11,6 +12,8 @@ public class RespuestaCompraArticuloTestDataBuilder {
     private int cantidad;
     private BigDecimal valorUnidad;
     private BigDecimal valorTotal;
+
+    private LocalDate fechaCompra;
 
     public RespuestaCompraArticuloTestDataBuilder conId(Long id){
         this.id = id;
@@ -37,7 +40,12 @@ public class RespuestaCompraArticuloTestDataBuilder {
         return this;
     }
 
+    public RespuestaCompraArticuloTestDataBuilder conFechaCompra(LocalDate fechaCompra){
+        this.fechaCompra = fechaCompra;
+        return this;
+    }
+
     public RespuestaCompraArticulo buil(){
-        return new RespuestaCompraArticulo(id, articulo, cantidad, valorUnidad, valorTotal);
+        return new RespuestaCompraArticulo(id, articulo, cantidad, valorUnidad, valorTotal, fechaCompra);
     }
 }

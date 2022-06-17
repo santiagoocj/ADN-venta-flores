@@ -21,8 +21,8 @@ public class ManejadorEditar implements ManejadorComandoRespuesta<ComandoSolicit
     }
 
     @Override
-    public ComandoRespuesta<Long> ejecutar(ComandoSolicitudEditar comando) {
-        var solicitudArticulo = fabricaSolicitdEditar.editar(comando);
+    public ComandoRespuesta<Long> ejecutar(ComandoSolicitudEditar comandoSolicitudEditar) {
+        var solicitudArticulo = fabricaSolicitdEditar.editar(comandoSolicitudEditar);
         return new ComandoRespuesta<>(servicioEditar.ejecutar(solicitudArticulo));
     }
 }

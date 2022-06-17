@@ -13,9 +13,12 @@ public class ServicioListarDisponibles {
 
     private final RepositorioArticulo repositorioArticulo;
 
-    public ServicioListarDisponibles(DaoArticulo daoArticulo, RepositorioArticulo repositorioArticulo) {
+    private final ServicioDiferenciaFechas servicioDiferenciaFechas;
+
+    public ServicioListarDisponibles(DaoArticulo daoArticulo, RepositorioArticulo repositorioArticulo, ServicioDiferenciaFechas servicioDiferenciaFechas) {
         this.daoArticulo = daoArticulo;
         this.repositorioArticulo = repositorioArticulo;
+        this.servicioDiferenciaFechas = servicioDiferenciaFechas;
     }
 
     public List<ArticuloDTO> ejecutar(){
@@ -25,7 +28,7 @@ public class ServicioListarDisponibles {
 
     private void eliminarArticulosNoValidosPorExcederTiempo(){
         daoArticulo.obtenerListaDeArticulosDisponibles().stream()
-                        .filter(articulo -> ServicioFechas.obtenerDiferenciaEnMesesAFechaActual(articulo.getFechaCreacion()) >= NUMERO_MESES_VALIDO_ARTICULO)
+                        .filter(articulo -> servicioDiferenciaFechas.obtenerDiferenciaEnMesesAFechaActual(articulo.getFechaCreacion()) >= NUMERO_MESES_VALIDO_ARTICULO)
                         .forEach(articuloEliminar -> repositorioArticulo.eliminar(articuloEliminar.getId()));
     }
 }

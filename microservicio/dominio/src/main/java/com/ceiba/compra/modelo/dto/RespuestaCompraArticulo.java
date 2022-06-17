@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @Getter
@@ -14,15 +15,5 @@ public class RespuestaCompraArticulo {
     private int cantidad;
     private BigDecimal valorUnidad;
     private BigDecimal valorTotal;
-
-    @Override
-    public String toString() {
-        return "RespuestaCompraArticulo{" +
-                "id=" + id +
-                ", articulo='" + articulo + '\'' +
-                ", cantidad=" + cantidad +
-                ", valorUnidad=" + valorUnidad +
-                ", valorTotal=" + valorTotal +
-                '}';
-    }
+    private LocalDate fechaCompra;
 }

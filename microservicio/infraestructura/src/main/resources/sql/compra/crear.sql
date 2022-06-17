@@ -1,1 +1,1 @@
-insert into compra(id_articulo, valor_total) values(:id_articulo, :valor_total)
+insert into compra(id_articulo, valor_total, fecha_compra) values(:id_articulo, :valor_total, :fecha_compra)

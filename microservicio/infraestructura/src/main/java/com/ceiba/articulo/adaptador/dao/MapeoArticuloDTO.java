@@ -18,6 +18,6 @@ public class MapeoArticuloDTO implements RowMapper<ArticuloDTO>, MapperResult {
         var valorUnidad = resultSet.getBigDecimal("valor_unidad");
         var fechaCreacion = resultSet.getDate("fecha_creacion");
 
-        return new ArticuloDTO(id, tipoFlor, cantidadDisponible, valorUnidad, fechaCreacion);
+        return new ArticuloDTO(id, tipoFlor, cantidadDisponible, valorUnidad, fechaCreacion.toLocalDate());
     }
 }
