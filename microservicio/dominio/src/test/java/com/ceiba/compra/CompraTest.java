@@ -54,5 +54,4 @@ public class CompraTest {
                     .conArticulo(new ArticuloTestDataBuilder().articuloTestDataBuilder().crear()).crear(), ExcepcionArticuloNoDisponibleParaLaCompra.class, "No Se puede realizar pedidos el día lunes");
         }
     }
-
 }
