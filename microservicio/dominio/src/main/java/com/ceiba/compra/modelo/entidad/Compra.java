@@ -44,7 +44,10 @@ public class Compra {
 
     public boolean esDiaFestivo() {
         int domingo = Calendar.SUNDAY;
-        return (obtenerDiaDeLaSemana() == domingo)? true: false;
+        if(obtenerDiaDeLaSemana() == domingo){
+            return true;
+        }
+        return false;
     }
 
     private int obtenerDiaDeLaSemana() {

@@ -1,5 +1,6 @@
 package com.ceiba.compra;
 
+import com.ceiba.BasePrueba;
 import com.ceiba.articulo.ArticuloTestDataBuilder;
 import com.ceiba.compra.excepcion.ExcepcionArticuloNoDisponibleParaLaCompra;
 import org.junit.jupiter.api.Assertions;
@@ -48,12 +49,9 @@ public class CompraTest {
         Calendar calendar = Calendar.getInstance();
         int diaActual = calendar.get(Calendar.DAY_OF_WEEK);
         if(diaActual == Calendar.MONDAY){
-            Assertions.assertThrows(ExcepcionArticuloNoDisponibleParaLaCompra.class, () -> {
-                var compra = new CompraTestDataBuilder()
-                        .conId(1L)
-                        .conArticulo(new ArticuloTestDataBuilder().articuloTestDataBuilder().crear())
-                        .crear();
-            });
+            BasePrueba.assertThrows(() -> new CompraTestDataBuilder()
+                    .conId(1L)
+                    .conArticulo(new ArticuloTestDataBuilder().articuloTestDataBuilder().crear()).crear(), ExcepcionArticuloNoDisponibleParaLaCompra.class, "No Se puede realizar pedidos el día lunes");
         }
     }
 
