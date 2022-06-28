@@ -6,7 +6,7 @@ import java.time.temporal.ChronoUnit;
 
 public class ServicioDiferenciaFechas {
 
-    private final int CONVERTIR_POSITIVO = -1;
+    private static final int CONVERTIR_POSITIVO = -1;
 
     public long obtenerDiferenciaEnMesesAFechaActual(LocalDate fechalimite){
         LocalDate fechaActual = LocalDate.now();
