@@ -44,7 +44,7 @@ public class ConsultaControladorArticuloTest {
         List<ArticuloDTO> articulosObtenidos = Arrays.asList(respuesta);
 
         Assertions.assertTrue(!articulosObtenidos.isEmpty());
-        Assertions.assertEquals(2,articulosObtenidos.size());
+        Assertions.assertEquals(3,articulosObtenidos.size());
         Assertions.assertEquals(1, articulosObtenidos.get(0).getId());
         Assertions.assertEquals("hortencia", articulosObtenidos.get(0).getTipoFlor());
         Assertions.assertEquals(2, articulosObtenidos.get(1).getId());
