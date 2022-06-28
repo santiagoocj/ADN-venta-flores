@@ -35,6 +35,10 @@ public class Compra {
         agregarValorAdicional(PORCENTAJE_AUMENTAR_VALOR_TOTAL);
     }
 
+    // ¿que tan recomendable son los constructores vacios?, en este caso se utiliza para poder implementar pruebas?
+    public Compra() {
+    }
+
     public void validarDiaDeLaSemanaDiferenteALunes() {
         int lunes = Calendar.MONDAY;
         if(obtenerDiaDeLaSemana() == lunes){
@@ -52,9 +56,9 @@ public class Compra {
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
-    public static Compra crear(Long id, Articulo articulo){
+    public static Compra crear(Long idCompra, Articulo articulo){
         ValidadorArgumento.validarObligatorio(articulo,"El articulo debe existir");
-        return new Compra(id, articulo);
+        return new Compra(idCompra, articulo);
     }
 
     public void agregarValorAdicional(Double porcentajeAgrgar){

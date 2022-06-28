@@ -11,7 +11,8 @@ public class ServicioDiferenciaFechasTest {
     @Test
     void obtenerDiferenciaEnNumeroDeMesesDeDosFechasIgualesDebeRetornarCero(){
         var servicioDiferenciaFechas = new ServicioDiferenciaFechas();
-        long diferenciaDeMeses = servicioDiferenciaFechas.obtenerDiferenciaEnMesesAFechaActual(LocalDate.now());
-        Assertions.assertEquals(0, diferenciaDeMeses);
+        LocalDate fechaActualAumentadaDosMeses = LocalDate.now().plusMonths(3);
+        long diferenciaDeMeses = servicioDiferenciaFechas.obtenerDiferenciaEnMesesAFechaActual(fechaActualAumentadaDosMeses);
+        Assertions.assertEquals(3, diferenciaDeMeses);
     }
 }

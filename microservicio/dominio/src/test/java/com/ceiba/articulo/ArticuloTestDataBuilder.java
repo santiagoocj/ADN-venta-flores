@@ -2,6 +2,7 @@ package com.ceiba.articulo;
 
 
 import com.ceiba.articulo.modelo.entidad.Articulo;
+import com.ceiba.articulo.modelo.entidad.SolicitudArticulo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -48,7 +49,11 @@ public class ArticuloTestDataBuilder {
         return this;
     }
 
-    public Articulo crear(){
+    public Articulo reconstruir(){
         return Articulo.reconstruir(id, tipoFlor, cantidadDisponible, valorUnidad, fechaCreacion);
+    }
+
+    public Articulo crear(){
+        return Articulo.crear(new SolicitudArticulo(tipoFlor, cantidadDisponible, valorUnidad));
     }
 }

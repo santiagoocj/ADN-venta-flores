@@ -4,6 +4,7 @@ import com.ceiba.articulo.ArticuloTestDataBuilder;
 import com.ceiba.compra.excepcion.ExcepcionArticuloNoDisponibleParaLaCompra;
 import com.ceiba.compra.puerto.repositorio.RepositorioCompra;
 import com.ceiba.compra.servicio.ServicioComprar;
+import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,7 +26,7 @@ public class ServicioComprarTest {
                     .conTipoFlor("Hortencia")
                     .conCantidadDisponible(20)
                     .conValorUnidad(new BigDecimal("2000"))
-                    .crear();
+                    .reconstruir();
             var repositorioCompra = Mockito.mock(RepositorioCompra.class);
             Mockito.when(repositorioCompra.guardar(Mockito.any())).thenReturn(1L);
 
@@ -48,7 +49,27 @@ public class ServicioComprarTest {
             Assertions.assertEquals(respuestaEsperada.getArticulo(), respuestaCompra.getArticulo());
             Assertions.assertEquals(respuestaEsperada.getCantidad(), respuestaCompra.getCantidad());
             Assertions.assertEquals(respuestaEsperada.getValorTotal(), respuestaCompra.getValorTotal());
+            Assertions.assertEquals(respuestaEsperada.getFechaCompra(), respuestaCompra.getFechaCompra());
         }
+    }
+
+    @Test
+    void validarRespuestaCompraArticulo(){
+        var respuestaCompraArticulo = new RespuestaCompraArticuloTestDataBuilder()
+                .conId(1L)
+                .conArticulo("Hortencia")
+                .conCantidad(20)
+                .conValorUnidad(new BigDecimal("2000"))
+                .conValorTotal(new BigDecimal("40000"))
+                .conFechaCompra(LocalDate.now())
+                .buil();
+
+        Assertions.assertEquals(1L, respuestaCompraArticulo.getId());
+        Assertions.assertEquals("Hortencia", respuestaCompraArticulo.getArticulo());
+        Assertions.assertEquals(20, respuestaCompraArticulo.getCantidad());
+        Assertions.assertEquals(new BigDecimal("2000"), respuestaCompraArticulo.getValorUnidad());
+        Assertions.assertEquals(new BigDecimal("40000"), respuestaCompraArticulo.getValorTotal());
+        Assertions.assertEquals(LocalDate.now(), respuestaCompraArticulo.getFechaCompra());
     }
 
     @Test
@@ -62,7 +83,7 @@ public class ServicioComprarTest {
                     .conTipoFlor("Hortencia")
                     .conCantidadDisponible(20)
                     .conValorUnidad(new BigDecimal("2000"))
-                    .crear();
+                    .reconstruir();
             var repositorioCompra = Mockito.mock(RepositorioCompra.class);
             Mockito.when(repositorioCompra.guardar(Mockito.any())).thenReturn(0L);
 
@@ -87,7 +108,7 @@ public class ServicioComprarTest {
                     .conTipoFlor("Hortencia")
                     .conCantidadDisponible(20)
                     .conValorUnidad(new BigDecimal("2000"))
-                    .crear();
+                    .reconstruir();
             var repositorioCompra = Mockito.mock(RepositorioCompra.class);
             Mockito.when(repositorioCompra.guardar(Mockito.any())).thenReturn(0L);
 
@@ -110,5 +131,20 @@ public class ServicioComprarTest {
             Assertions.assertEquals(respuestaEsperada.getCantidad(), respuestaCompra.getCantidad());
             Assertions.assertEquals(respuestaEsperada.getValorTotal(), respuestaCompra.getValorTotal());
         }
+    }
+
+    @Test
+    void realizarCompraDeunArticuloNuloDebeRetornarError(){
+        //Arrange
+        var repositorioCompra = Mockito.mock(RepositorioCompra.class);
+        Mockito.when(repositorioCompra.guardar(Mockito.any())).thenReturn(0L);
+
+        //Act
+        var servicioComprar = new ServicioComprar( repositorioCompra);
+
+        //Assert
+        Assertions.assertThrows(ExcepcionValorObligatorio.class, ()->{
+            servicioComprar.ejecutar(null);
+        });
     }
 }

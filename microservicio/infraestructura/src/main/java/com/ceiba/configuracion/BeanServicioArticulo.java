@@ -25,8 +25,8 @@ public class BeanServicioArticulo {
     }
 
     @Bean
-    public ServicioListarDisponibles servicioListarDisponibles(DaoArticulo daoArticulo, RepositorioArticulo repositorioArticulo, ServicioDiferenciaFechas servicioDiferenciaFechas){
-        return new ServicioListarDisponibles(daoArticulo, repositorioArticulo, servicioDiferenciaFechas);
+    public ServicioListarDisponibles servicioListarDisponibles(DaoArticulo daoArticulo,  ServicioDiferenciaFechas servicioDiferenciaFechas){
+        return new ServicioListarDisponibles(daoArticulo, servicioDiferenciaFechas);
     }
 
     @Bean

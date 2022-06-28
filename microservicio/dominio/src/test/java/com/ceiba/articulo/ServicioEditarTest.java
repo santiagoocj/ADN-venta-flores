@@ -30,9 +30,10 @@ public class ServicioEditarTest {
     @Test
     void editarArticuloExitoso(){
         //Arrange
+        var articulo = new ArticuloTestDataBuilder().articuloTestDataBuilder().crear();
         var repositorioArticulo = Mockito.mock(RepositorioArticulo.class);
-        Mockito.when(repositorioArticulo.obtener(1L)).thenReturn(Datos.ARTICULO);
-        Mockito.when(repositorioArticulo.actualizarEstado(Mockito.any())).thenReturn(1L);
+        Mockito.when(repositorioArticulo.obtener(1L)).thenReturn(articulo);
+        Mockito.when(repositorioArticulo.actualizarEstado(articulo)).thenReturn(1L);
 
         var servicioEditar = new ServicioEditar(repositorioArticulo);
 
@@ -43,11 +44,14 @@ public class ServicioEditarTest {
                 .conCantidadDisponible(50)
                 .conValorUnidad(new BigDecimal("5000"))
                 .build();
+
         long idArticuloActualizado = servicioEditar.ejecutar(solicitudArticuloEditar);
 
         //Assert
         Mockito.verify(repositorioArticulo).obtener(1L);
-        Mockito.verify(repositorioArticulo).actualizarEstado(Mockito.any());
+        Mockito.verify(repositorioArticulo).actualizarEstado(articulo);
         Assertions.assertEquals(1L, idArticuloActualizado);
+        Assertions.assertEquals(solicitudArticuloEditar.getTipoFlor(), articulo.getTipoFlor());
+        Assertions.assertEquals(solicitudArticuloEditar.getCantidadDisponible(), articulo.getCantidadDisponible());
     }
 }
