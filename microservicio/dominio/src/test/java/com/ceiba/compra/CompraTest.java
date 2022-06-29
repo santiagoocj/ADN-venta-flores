@@ -40,7 +40,6 @@ public class CompraTest {
                     .conId(1L)
                     .conArticulo(new ArticuloTestDataBuilder().articuloTestDataBuilder().reconstruir())
                     .crear();
-            compra.agregarValorAdicional(0.10);
             Assertions.assertEquals(1L, compra.getId());
             Assertions.assertEquals(1L, compra.getArticulo().getId());
             Assertions.assertEquals("Hortencia", compra.getArticulo().getTipoFlor());
@@ -57,6 +56,35 @@ public class CompraTest {
                     .conId(1L)
                     .conArticulo(new ArticuloTestDataBuilder().articuloTestDataBuilder().reconstruir()).crear(), ExcepcionArticuloNoDisponibleParaLaCompra.class, "No Se puede realizar pedidos el día lunes");
         }
+    }
+
+    @Test
+    void validarDiaDeLaSemanaLunesDebeRetornarError(){
+        var compra = new Compra(){
+            @Override
+            protected int obtenerDiaDeLaSemana(){
+                return Calendar.MONDAY;
+            }
+        };
+        BasePrueba.assertThrows(() -> compra.validarDiaDeLaSemanaDiferenteALunes(), ExcepcionArticuloNoDisponibleParaLaCompra.class, "No Se puede realizar pedidos el día lunes");
+    }
+
+    @Test
+    void validarValorAdicional(){
+        var articulo = new ArticuloTestDataBuilder()
+                .conId(1L)
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(20)
+                .conValorUnidad(new BigDecimal("1000"))
+                .conFechaCreacion(LocalDate.now())
+                .crear();
+        var compra = new Compra(articulo){
+            @Override
+            protected int obtenerDiaDeLaSemana(){
+                return Calendar.SUNDAY;
+            }
+        };
+        Assertions.assertEquals(new BigDecimal("22000.0"), compra.getValor());
     }
 
     @Test
@@ -85,11 +113,38 @@ public class CompraTest {
 
     @Test
     void obtenerDiaActualDeLaSemana(){
-        Calendar calendar = Calendar.getInstance();
-        int diaActual = calendar.get(Calendar.DAY_OF_WEEK);
+        var compra = new Compra(){
+            @Override
+            protected int obtenerDiaDeLaSemana(){
+              return Calendar.TUESDAY;
+            }
+        };
 
-        var compra = new Compra();
-        Assertions.assertEquals(diaActual, compra.obtenerDiaDeLaSemana());
+        Assertions.assertEquals(Calendar.TUESDAY, compra.obtenerDiaDeLaSemana());
+    }
+
+    @Test
+    void validarDiaFestivo(){
+        var compra = new Compra(){
+            @Override
+            protected int obtenerDiaDeLaSemana(){
+                return Calendar.SUNDAY;
+            }
+        };
+        Assertions.assertTrue(compra.esDiaFestivo());
+    }
+
+    @Test
+    void crearCompraDirectamenteConId(){
+        var idCompra = 1L;
+        var articulo = new ArticuloTestDataBuilder()
+                .conId(1L)
+                .conTipoFlor("Hortencia")
+                .conCantidadDisponible(20)
+                .conValorUnidad(new BigDecimal("1500"))
+                .conFechaCreacion(LocalDate.now()).crear();
+
+
     }
 
 }

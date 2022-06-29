@@ -51,7 +51,7 @@ public class Compra {
         return obtenerDiaDeLaSemana() == domingo;
     }
 
-    public int obtenerDiaDeLaSemana() {
+    protected int obtenerDiaDeLaSemana() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
